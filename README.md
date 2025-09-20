@@ -16,7 +16,7 @@ Passenger demographics: Age, Sex
 
 Ticket information: Pclass, Fare, Embarked
 
-Family-related features: SibSp, Parch, FamilySize, IsAlone, Family
+Family-related features: SibSp, Parch, FamilySize, Family
 
 🖊Purpose
 
