@@ -1,16 +1,18 @@
-# 🚢Titanic Survival Prediction Project
+# 🚢 Titanic Survival Prediction Project
 
-🔎Project Overview
+🔎 Project Overview
 
-This project aims to predict the survival of passengers on the Titanic using machine learning techniques. By analyzing passenger data such as gender, age, class, and family information, the project builds models to classify whether a passenger survived or not. Feature engineering is applied to create additional useful features, improving model performance.
+This project predicts the survival of passengers on the Titanic using machine learning. 
+By analyzing passenger data such as gender, age, class, fare, and family details, multiple models are trained and compared to identify the best-performing approach. 
+Feature engineering is applied to improve prediction accuracy.
 
-📌Dataset
+📌 Dataset
 
-Training Set (train.csv): Contains passenger information along with the survival outcome (Survived). Used to train and evaluate machine learning models.
+Training Set (train.csv) – Includes passenger details with survival labels. Used for training and evaluation.
 
-Test Set (test.csv): Contains passenger information without survival outcomes. Used to generate predictions for unseen data.
+Test Set (test.csv) – Includes passenger details without survival labels. Used for generating predictions on unseen data.
 
-🔷Features include:
+🔷 Key Features
 
 Passenger demographics: Age, Sex
 
@@ -18,47 +20,57 @@ Ticket information: Pclass, Fare, Embarked
 
 Family-related features: SibSp, Parch, FamilySize, Family
 
-🖊Purpose
+🖊 Purpose
 
 Predict passenger survival using machine learning.
 
-Identify important features that influence survival.
+Identify key features that influence survival chances.
 
-Compare multiple models (Logistic Regression, Decision Tree, Random Forest, Gradient Boosting, XGBoost, LightGBM) to select the best-performing one.
+Compare different models (baseline and advanced) to select the best.
 
-Generate predictions for unseen test data in a Kaggle-style submission format.
+Generate predictions in Kaggle submission format.
 
-✂Features Engineering
+✂ Feature Engineering
 
-FamilySize: Sum of siblings/spouses and parents/children aboard + 1
+FamilySize: SibSp + Parch + 1
 
-Family: 0 if alone, 1 if with family
+Family: 0 if FamilySize == 1 else 1 (alone vs with family)
 
-🛢Models Used
+Binned Family Size: Grouped into Small, Medium, Large for analysis.
 
-1.Logistic Regression
+Outlier handling and missing value imputation applied where needed.
 
-2.Decision Tree
+🛢 Models Used
 
-3.Random Forest
+* Logistic Regression
 
-4.Gradient Boosting
+* Decision Tree
 
-5.XGBoost
+* Random Forest
 
-6.LightGBM
+* Gradient Boosting
 
-🧵 Pipelines were used for preprocessing (scaling, encoding) and modeling, ensuring consistency between training and prediction.
+* XGBoost
 
-🔓Usage
+* LightGBM
 
-Train the model: Load train.csv and fit the pipeline.
+* Support Vector Classifier (SVC)
 
-Save the trained model: Use pickle or joblib to save the pipeline.
+* K-Nearest Neighbors (KNN)
 
-Predict on test set: Load test.csv, add derived features if needed, and generate predictions.
+👉 Pipelines were used for preprocessing (scaling, encoding) and model training to ensure consistent and clean workflows.
 
-Generate submission: Create a CSV file with PassengerId and predicted Survived values.
+🔓 Usage
+
+Train models: Load train.csv, preprocess, and fit pipelines.
+
+Tune hyperparameters: GridSearchCV applied to optimize models (e.g., C, depth, learning rate).
+
+Evaluate models: Compare performance using cross-validation and test predictions.
+
+Save models: Export best pipeline using pickle or joblib.
+
+Generate submission:
 
 submission = pd.DataFrame({
     "PassengerId": test["PassengerId"],
@@ -66,30 +78,40 @@ submission = pd.DataFrame({
 })
 submission.to_csv("submission.csv", index=False)
 
+🛠 Evaluation
 
-🛠Evaluation
+Metrics used: Accuracy, Precision, Recall, F1-score
 
-Accuracy, precision, recall, and F1-score were used to evaluate model performance on the training/validation set.
+Visualization: Confusion matrices, classification reports, boxplots, and distributions to analyze data and results.
 
-Confusion matrices and classification reports provide insight into how well the models identify survivors vs non-survivors.
+📊 Model Comparison (Summary)
 
-📌Requirements
+Best Performer: Gradient Boosting (highest accuracy & F1-score).
+
+Strong Competitors: Random Forest, XGBoost, and Decision Tree.
+
+Baseline: Logistic Regression gave solid results with good interpretability.
+
+Weaker Models: KNN and SVC underperformed compared to ensembles.
+
+📍 Conclusion
+
+Ensemble models like Gradient Boosting and XGBoost deliver the most reliable results for Titanic survival prediction.
+
+Feature engineering (FamilySize, Family) and handling missing values/outliers significantly improve model accuracy.
+
+Logistic Regression remains a simple but effective baseline, while advanced boosting methods capture complex interactions better.
+
+📌 Requirements
 
 Python 3.x
 
-Pandas
-
-NumPy
+Pandas, NumPy
 
 Scikit-learn
 
-LightGBM / XGBoost (optional)
+LightGBM, XGBoost
 
-Matplotlib / Seaborn (for visualization)
+Matplotlib, Seaborn
 
-📍Conclusion
-
-This project demonstrates how machine learning can predict survival outcomes on historical data.
-Ensemble models like XGBoost and Gradient Boosting typically perform best, while feature engineering (e.g., family features) improves prediction accuracy.
-
-🙋‍♀️Author: Sonia Firdous
+👩‍💻 Author: Sonia Firdous
